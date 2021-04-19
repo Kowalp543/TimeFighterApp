@@ -43,27 +43,25 @@ class MainActivity : AppCompatActivity() {
 
         gameButton.setOnClickListener { v ->
 
-            val bounceAnimation = AnimationUtils.loadAnimation( this, R.anim.bounce)
+            val bounceAnimation = AnimationUtils.loadAnimation(this, R.anim.bounce)
             bounceAnimation.setAnimationListener(object: Animation.AnimationListener {
                 override fun onAnimationEnd(animation: Animation?) {
-                    TODO("Not yet implemented")
                 }
 
                 override fun onAnimationRepeat(animation: Animation?) {
-                    TODO("Not yet implemented")
                 }
 
                 override fun onAnimationStart(animation: Animation?) {
-                    TODO("Not yet implemented")
                     incrementScore()
                 }
-            })
+            }
+            )
             v.startAnimation(bounceAnimation)
         }
 
-        gameButton.setOnClickListener {
-            incrementScore()
-        }
+//        gameButton.setOnClickListener {
+//            incrementScore()                       bez animacji
+//       }
 
         if (savedInstanceState != null) {
             score = savedInstanceState.getInt(SCORE_KEY)
@@ -136,9 +134,9 @@ class MainActivity : AppCompatActivity() {
             override fun onFinish() {
                 endGame()
             }
-
-
         }
+
+        gameStarted = false
     }
 
     private fun restoreGame() {
