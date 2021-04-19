@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -39,6 +41,26 @@ class MainActivity : AppCompatActivity() {
         gameTime = findViewById(R.id.game_time)
         gameButton = findViewById(R.id.game_button)
 
+        gameButton.setOnClickListener { v ->
+
+            val bounceAnimation = AnimationUtils.loadAnimation( this, R.anim.bounce)
+            bounceAnimation.setAnimationListener(object: Animation.AnimationListener {
+                override fun onAnimationEnd(animation: Animation?) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onAnimationStart(animation: Animation?) {
+                    TODO("Not yet implemented")
+                    incrementScore()
+                }
+            })
+            v.startAnimation(bounceAnimation)
+        }
+
         gameButton.setOnClickListener {
             incrementScore()
         }
@@ -64,26 +86,26 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-//    override fun onStart() {
-//        super.onStart()
-//        Log.d(TAG, "onStart() called")
-//    }
-//    override fun onResume() {
-//        super.onResume()
-//        Log.d(TAG, "onResume() called")
-//    }
-//    override fun onPause() {
-//        super.onPause()
-//        Log.d(TAG, "onPause() called")
-//    }
-//    override fun onStop() {
-//        super.onStop()
-//        Log.d(TAG, "onStop() called")
-//    }
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        Log.d(TAG, "onDestroy() called")
-//    }
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart() called")
+    }
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume() called")
+    }
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause() called")
+    }
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop() called")
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy() called")
+    }
 
     private fun incrementScore() {
         if(!gameStarted) {
@@ -104,7 +126,7 @@ class MainActivity : AppCompatActivity() {
 
         gameStarted = false
 
-        countDownTimer = object : CountDownTimer(initialCountDown, countDownInterval) {
+        countDownTimer = object : CountDownTimer(initialCountDown, countDownInterval) {  //Wyrazenie obiektowe
             override fun onTick(millisUntilFinished: Long) {
                 timeLeft = millisUntilFinished.toInt() /1000
                 val timeLeftString = getString(R.string.time_left, timeLeft)
@@ -114,6 +136,8 @@ class MainActivity : AppCompatActivity() {
             override fun onFinish() {
                 endGame()
             }
+
+
         }
     }
 
